@@ -1,10 +1,14 @@
-import './App.css';
+import "./App.css";
+import {Routes,Route} from 'react-router-dom';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
-    <div className="container-fluid">
-      <h1 className="text-center">hello</h1>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage/>} />
+      </Routes>
+    </>
   );
 }
 
