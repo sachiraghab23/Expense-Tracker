@@ -29,7 +29,7 @@ const registerController = async (req, res) =>{
   } catch (error) {
      res.status(404).json({
       success:false,
-      error,
+      error:error.message,
      });
   }
 };
