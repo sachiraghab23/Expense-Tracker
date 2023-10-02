@@ -3,14 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/connectDB");
-
-//rest objects
-const app = express();
-
-//middlewares
-app.use(cors());
-app.use(express.json());
-app.use(morgan("dev"));
+// const router = require("./routes/userRoute");
 
 // env config filed
 dotenv.config();
@@ -18,10 +11,18 @@ dotenv.config();
 // database called
 connectDB();
 
+//rest objects
+const app = express();
+
+//middlewares
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(cors());
+
 //routes
-app.get("/", (req, res) => {
-  res.send(`<h1>Expense Tracker</h1>`);
-});
+// app.use('/api/v1/users',router)
+app.use('/api/v1/users', require('./routes/userRoutes'));
+app.use('/api/v1/transactions', require('./routes/transactionRoutes'));
 
 const PORT = 8080 || process.env.PORT;
 

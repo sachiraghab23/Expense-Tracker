@@ -14,23 +14,23 @@ const loginController = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      error: error.message,
+      error,
     });
   }
 };
-const registerController = async (req, res) =>{
+const registerController = async (req, res) => {
   try {
     const newUser = new userModel(req.body);
     await newUser.save();
     res.status(201).json({
-      success:true,
-      newUser
+      success: true,
+      newUser,
     });
   } catch (error) {
-     res.status(404).json({
-      success:false,
-      error:error.message,
-     });
+    res.status(400).json({
+      success: false,
+      error,
+    });
   }
 };
 
