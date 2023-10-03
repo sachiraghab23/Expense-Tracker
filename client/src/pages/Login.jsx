@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from './../services/API';
 import Spinner from "../components/Spinner";
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
   const submitHandler = async (values) => {
     try {
       setLoading(true);
-      const { data } = await axios.post("/users/login", values);
+      const { data } = await API.post("/users/login", values);
       setLoading(false);
       message.success("login successful");
       localStorage.setItem(

@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import Layout from "./../components/Layout/Layout";
 import Spinner from "./../components/Spinner";
-import axios from "axios";
+import API from './../services/API';
 import moment from "moment";
 import categories from "../data/category";
 import Analytics from "../components/Analytics";
@@ -70,7 +70,7 @@ const HomePage = () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         setLoading(true);
-        const res = await axios.post("./transactions/get-transactions", {
+        const res = await API.post("./transactions/get-transactions", {
           userid: user._id,
           frequency,
           selectedDate,
@@ -92,7 +92,7 @@ const HomePage = () => {
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await axios.post("/transactions/delete-transaction", {
+      await API.post("/transactions/delete-transaction", {
         transactionId: record._id,
       });
       setLoading(false);
@@ -108,14 +108,14 @@ const HomePage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       if (editable) {
-        await axios.post("/transactions/edit-transaction", {
+        await API.post("/transactions/edit-transaction", {
           payload: { ...values, userid: user._id },
           transactionId: editable._id,
         });
         setLoading(false);
         message.success("Transaction updated successfully");
       } else {
-        await axios.post("/transactions/add-transaction", {
+        await API.post("/transactions/add-transaction", {
           ...values,
           userid: user._id,
         });

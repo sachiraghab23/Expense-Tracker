@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Input, message } from "antd";
 import Spinner from "../components/Spinner";
-import axios from "axios";
+import API from './../services/API';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const Register = () => {
   const submitHandler = async (values) => {
     try {
       setLoading(true);
-      await axios.post("/users/register", values);
+      await API.post("/users/register", values);
       message.success("Registered successfully");
       setLoading(false);
       navigate("/login");
@@ -28,7 +28,6 @@ const Register = () => {
   }, [navigate]);
   return (
     <>
-      {console.log(axios)}
       <div className="register-page">
         {loading && <Spinner />}
         <Form layout="vertical" onFinish={submitHandler}>
